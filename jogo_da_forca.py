@@ -8,7 +8,6 @@ perdeu = f'''
    |\   |** Lose ** |
    |_
 '''
-
 numpa = 0
 secreta = [(" __ ") for i in range(20) ]
 mask = " __ "
