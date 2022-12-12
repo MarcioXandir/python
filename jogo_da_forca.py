@@ -1,39 +1,41 @@
+vitoria = f'''
+  \o/  
+   |   |** Winner ** |
+ _/ \_ 
+'''
+perdeu = f'''
+    o  
+   |\   |** Lose ** |
+   |_
+'''
+
 numpa = 0
-secreta = [" __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ "," __ ",]
+secreta = [(" __ ") for i in range(20) ]
 mask = " __ "
 certo = 0
 acertos = 0
 chances = 5
 repete = ""
 
-import os
-palavra = str(input("Informe a palavra: "))
-
-palavra = palavra.upper()
-for i,item in enumerate(palavra):
-  numpa += 1
-
-os.system('clear')
+palavra = input("Informe a palavra: ").upper()
+numpa = len(palavra)
 
 while chances > 0 and acertos < numpa:
+  print(15*"::")
   for i in range(numpa):
+    
     print(secreta[i], end="")
-
-  print()
-  print()
-
-  print("CHANCES FALTANTES: ", chances)
+ 
   
-  print('Letras informadas: ', repete.upper(),' ')
-  print()
-#  pause = input()
-  letra = input("Informe a letra: ")
-  letra = letra.upper()
+  letra = input("\nInforme uma letra: ").upper()
+  print(f'\n{15*"::"}')
+
   if letra in repete:
-    print("A letra", ' { ',letra.upper(),' }', " ja foi informada. ")
-    input("PRESSIONE <Enter> ")
-    chances -= 1
-    os.system('clear')
+    print(f">>> A letra '({letra.upper()})' ja foi informada. Tente outra")
+    chances -= 1 
+    print(f"SUAS CHANCES RESTANTES: {chances} DE 5 ")
+    print(f"Letras já informadas: >>>>> {repete.upper()} <<<<\n")
+    print(20*'.')
     continue
   
   for i, item in enumerate(palavra):
@@ -41,33 +43,21 @@ while chances > 0 and acertos < numpa:
       acertos += 1
       certo += 1
       secreta[i] = letra.upper()
-    #  if letra in repete:
-     #   continue
-      #else:
-       # repete += letra
-      
+     
     else:
       erro = 1
       if letra not in repete:
         repete += letra
-       
-  
+          
   if certo == 0:
     chances -= 1
   
   certo = 0
-  os.system('clear')
 
 if chances == 0:
-  print("Uma pena, vc perdeu")
+  print("\nUma pena, vc perdeu")
+  print(perdeu)
 
 if acertos == numpa:
-  print("Parabén, vc Venceu. A palavra é ")
-  print('{ ',palavra.upper(),' }')
-  print()
-  print()
-  for i in range(numpa):
-    print('  \o/  ')
-    print('   |   ')
-    print(' _/ \_ ')
-    print()
+  print(f"\n\nParabén, vc Venceu. A palavra era {palavra.upper()}\n")
+  print(vitoria)
