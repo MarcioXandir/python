@@ -2,10 +2,12 @@ saldo = 1000
 qtd_saques = 3
 limite_valor = 500
 saques_realizados = [] #extrato
+
+import pyautogui as pg
 #depositos_realizados = []#depositos q foram feitos
 #cc = []
-#clientes = []
-
+#clientes = []'''
+'''
 def saque(saldo,valor,saques_realizados,qtd_saques,limite_valor):
     if valor > limite_valor or valor > saldo or valor <= 0:
         print(f'Valor Inválido. Saque deve ser Máximo de R$ 500,00 e Mínimo R$ 1,00. Seu saldo atual: R$ {saldo}')
@@ -23,3 +25,6 @@ def saque(saldo,valor,saques_realizados,qtd_saques,limite_valor):
 valor = float(input('Informe o valor de saque: '))
 saldo, saques_realizados = saque(saldo=saldo,valor=valor,saques_realizados=saques_realizados,qtd_saques=qtd_saques,limite_valor=limite_valor)
 
+'''
+p=pg.position() #mosta posição do mouse
+print(p)
