@@ -4,6 +4,9 @@ menu = """
 (S) SAQUE
 (E) EXTRATO
 (D) DEPOSITO
+(N) CADASTRA CLIENTE
+(C) CADASTRA C.C.
+(T) CONSULTA C.C.
 (Q) SAIR 
 ..........................
 ##########################
@@ -19,7 +22,7 @@ saques_realizados = [] #extrato
 depositos_realizados = []#depositos q foram feitos
 
 cc = []
-clientes = []
+cadastro_clientes = []
 
 def deposito(saldo, valor, depositos_realizados):
     saldo += valor
@@ -60,13 +63,32 @@ def extrato(saldo):
 
     input('\n\nPressione ENTER para prosseguir.')
 
-def cad_cliente(isnumber):
-    cli_cpf = input('Informe o cpf do cliente, somente numeros: ')
+def cad_cliente():
+    cli_cpf = int(input('Informe o cpf do cliente, somente numeros: '))
     cli_nome = input('Informe o nome cliente: ')
     cli_endereco = input('Informe o endereço do cliente: ')
     cli_dt_nascimento = input('informe a data de nascimento: ')
 
     return cli_cpf, cli_nome, cli_dt_nascimento, cli_endereco
+
+def cadastro_cc(cadastro_clientes,cc):
+    agencia = '0001'
+    numero_cc = len(cc)+1
+    cpf_correntista = cadastro_clientes[0]
+    nome_correntista = cadastro_clientes[1]
+    print('conta corrente criada!')
+
+    return numero_cc,agencia,nome_correntista,cpf_correntista
+
+def mostra_cc(cc):
+    for i in range(len(cc)):
+        print(f'CPF: {cc[i][3]}')
+        print(f'CC: {cc[i][0]}')
+        print(f'Agência: {cc[i][1]}')
+        print(f'Correntista: {cc[i][2]}')
+
+
+
 
 
 while True:
@@ -75,7 +97,18 @@ while True:
     if opcao == 'Q':
         print("Obrigado por usar nossos serviços!!")
         break
+    
+    elif opcao == "N":
+        cadastro_clientes = cad_cliente()
+        dados_cc = cadastro_cc(cadastro_clientes,cc)
+        cc.append(dados_cc)
 
+    elif opcao == "C":
+        cadastro_cc(cc=cc,cadastro_clientes=cadastro_clientes)
+
+    elif opcao == 'T':
+        mostra_cc(cc)
+    
     elif opcao == 'D':
         valor = float(input("Informe o valor de deposito: "))
         # depositos somente positivos,
